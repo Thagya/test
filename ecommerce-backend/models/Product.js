@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-  name: { type: String, required: true },            // Product name
-  description: { type: String, required: true },     // Product description
-  price: { type: Number, required: true },           // Price
-  category: { type: String, default: "General" },    // Category (Eco-friendly bags, bottles, etc.)
-  image: { type: String },                           // Product image URL
-  stock: { type: Number, default: 0 },               // Inventory count
-  createdAt: { type: Date, default: Date.now },      // Timestamp
+  name: { type: String, required: true },            
+  description: { type: String, required: true },     
+  price: { type: Number, required: true },           
+  category: { type: String, default: "General" },    
+  image: { type: String, default: "" },              // 👈 added image field
+  stock: { type: Number, default: 0 },               
+  createdAt: { type: Date, default: Date.now },      
 });
 
 module.exports = mongoose.model("Product", productSchema);

@@ -9,14 +9,15 @@ const {
 } = require("../controllers/productController");
 
 const { verifyToken } = require("../middleware/authMiddleware");
+const { isAdmin } = require("../middleware/adminMiddleware");
 
 // Public
 router.get("/", getProducts);
 router.get("/:id", getProductById);
 
-// Protected
-router.post("/", verifyToken, addProduct);
-router.put("/:id", verifyToken, updateProduct);
-router.delete("/:id", verifyToken, deleteProduct);
+// Admin Only
+router.post("/", verifyToken, isAdmin, addProduct);
+router.put("/:id", verifyToken, isAdmin, updateProduct);
+router.delete("/:id", verifyToken, isAdmin, deleteProduct);
 
 module.exports = router;
