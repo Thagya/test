@@ -1,3 +1,4 @@
+// ecommerce-backend/controllers/authController.js
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
@@ -5,7 +6,7 @@ const User = require("../models/User");
 // Register
 exports.register = async (req, res) => {
   try {
-    const { username, password, role } = req.body; // 👈 accept role if passed
+    const { username, password, role } = req.body;
     if (!username || !password)
       return res.status(400).json({ error: "Username & password required" });
 
@@ -13,7 +14,7 @@ exports.register = async (req, res) => {
     if (existingUser) return res.status(400).json({ error: "Username already taken" });
 
     const hashed = bcrypt.hashSync(password, 8);
-    const newUser = new User({ username, password: hashed, role: role || "user" }); // 👈 default to "user"
+    const newUser = new User({ username, password: hashed, role: role || "user" });
     await newUser.save();
 
     res.json({ message: "User registered", userId: newUser._id, role: newUser.role });
@@ -35,12 +36,111 @@ exports.login = async (req, res) => {
     if (!validPass) return res.status(401).json({ error: "Invalid credentials" });
 
     const token = jwt.sign(
-      { id: user._id, username: user.username, role: user.role }, // 👈 include role
+      { id: user._id, username: user.username, role: user.role },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "24h" } // Extended to 24 hours
     );
 
-    res.json({ message: "Login successful", token, role: user.role });
+    res.json({ 
+      message: "Login successful", 
+      token, 
+      role: user.role,
+      user: {
+        id: user._id,
+        username: user.username,
+        role: user.role
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Get Profile
+exports.getProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    res.json({
+      user: {
+        id: user._id,
+        username: user.username,
+        role: user.role,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Update Profile
+exports.updateProfile = async (req, res) => {
+  try {
+    const { username } = req.body;
+    const userId = req.user.id;
+
+    // Check if username is taken by another user
+    if (username) {
+      const existingUser = await User.findOne({ 
+        username, 
+        _id: { $ne: userId } 
+      });
+      if (existingUser) {
+        return res.status(400).json({ error: "Username already taken" });
+      }
+    }
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { username },
+      { new: true, select: '-password' }
+    );
+
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    res.json({
+      message: "Profile updated successfully",
+      user: {
+        id: user._id,
+        username: user.username,
+        role: user.role,
+        updatedAt: user.updatedAt
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Change Password
+exports.changePassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const userId = req.user.id;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ error: "Current password and new password are required" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    const validPass = bcrypt.compareSync(currentPassword, user.password);
+    if (!validPass) {
+      return res.status(401).json({ error: "Current password is incorrect" });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ error: "New password must be at least 6 characters long" });
+    }
+
+    const hashedNewPassword = bcrypt.hashSync(newPassword, 8);
+    await User.findByIdAndUpdate(userId, { password: hashedNewPassword });
+
+    res.json({ message: "Password changed successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
