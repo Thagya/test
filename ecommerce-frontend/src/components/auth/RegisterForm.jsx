@@ -12,9 +12,8 @@ const RegisterForm = ({ onSuccess }) => {
   const { isLoading, error } = useSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
+    username: "",  // ✅ Matches backend expectation
+  password: "",
   });
 
   const handleChange = (e) => {
@@ -48,23 +47,14 @@ const RegisterForm = ({ onSuccess }) => {
       <Input
         icon={<User className="w-4 h-4 text-gray-400" />}
         type="text"
-        name="name"
-        placeholder="Full Name"
-        value={formData.name}
+        name="username"
+        placeholder="Username"
+        value={formData.username}
         onChange={handleChange}
         required
       />
 
-      <Input
-        icon={<Mail className="w-4 h-4 text-gray-400" />}
-        type="email"
-        name="email"
-        placeholder="Email address"
-        value={formData.email}
-        onChange={handleChange}
-        required
-      />
-
+      
       <Input
         icon={<Lock className="w-4 h-4 text-gray-400" />}
         type="password"

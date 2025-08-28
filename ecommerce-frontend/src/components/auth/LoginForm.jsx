@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { LogIn, Mail, Lock } from "lucide-react";
+import { LogIn, User, Lock } from "lucide-react";
 import { loginUser } from "../../store/authSlice";
 
 import Input from "../ui/Input";

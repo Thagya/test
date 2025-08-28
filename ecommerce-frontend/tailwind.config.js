@@ -15,15 +15,16 @@ module.exports = {
         'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       animation: {
-        'float': 'float 6s ease-in-out infinite',
+        float: 'float 6s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'shake': 'shake 0.5s ease-in-out',
+        glow: 'glow 2s ease-in-out infinite alternate',
+        shake: 'shake 0.5s ease-in-out',
         'bounce-in': 'bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
         'fade-in-up': 'fadeInUp 0.6s ease-out',
         'fade-in-down': 'fadeInDown 0.6s ease-out',
         'slide-in-left': 'slideInLeft 0.6s ease-out',
         'slide-in-right': 'slideInRight 0.6s ease-out',
+        shimmer: 'shimmer 1.5s infinite', // ✅ shimmer animation added
       },
       keyframes: {
         float: {
@@ -31,8 +32,8 @@ module.exports = {
           '50%': { transform: 'translateY(-20px)' },
         },
         glow: {
-          'from': { boxShadow: '0 0 20px rgba(16, 185, 129, 0.3)' },
-          'to': { boxShadow: '0 0 30px rgba(16, 185, 129, 0.6)' },
+          from: { boxShadow: '0 0 20px rgba(16, 185, 129, 0.3)' },
+          to: { boxShadow: '0 0 30px rgba(16, 185, 129, 0.6)' },
         },
         shake: {
           '0%, 100%': { transform: 'translateX(0)' },
@@ -46,31 +47,35 @@ module.exports = {
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
         fadeInUp: {
-          'from': { opacity: '0', transform: 'translateY(30px)' },
-          'to': { opacity: '1', transform: 'translateY(0)' },
+          from: { opacity: '0', transform: 'translateY(30px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
         },
         fadeInDown: {
-          'from': { opacity: '0', transform: 'translateY(-30px)' },
-          'to': { opacity: '1', transform: 'translateY(0)' },
+          from: { opacity: '0', transform: 'translateY(-30px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
         },
         slideInLeft: {
-          'from': { opacity: '0', transform: 'translateX(-100%)' },
-          'to': { opacity: '1', transform: 'translateX(0)' },
+          from: { opacity: '0', transform: 'translateX(-100%)' },
+          to: { opacity: '1', transform: 'translateX(0)' },
         },
         slideInRight: {
-          'from': { opacity: '0', transform: 'translateX(100%)' },
-          'to': { opacity: '1', transform: 'translateX(0)' },
+          from: { opacity: '0', transform: 'translateX(100%)' },
+          to: { opacity: '1', transform: 'translateX(0)' },
+        },
+        shimmer: { // ✅ shimmer keyframes
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
         },
       },
       backdropBlur: {
         xs: '2px',
       },
       boxShadow: {
-        'glow': '0 0 20px rgba(16, 185, 129, 0.3)',
+        glow: '0 0 20px rgba(16, 185, 129, 0.3)',
         'glow-lg': '0 0 40px rgba(16, 185, 129, 0.4)',
-        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-        'medium': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-        'large': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+        soft: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        medium: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        large: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
       },
       backgroundImage: {
         'gradient-primary': 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
@@ -83,8 +88,8 @@ module.exports = {
         '128': '32rem',
       },
       transitionTimingFunction: {
-        'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
-        'bounce': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+        smooth: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
       },
       scale: {
         '102': '1.02',

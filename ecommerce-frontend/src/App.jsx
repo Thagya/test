@@ -9,7 +9,7 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import CartDrawer from './components/cart/CartDrawer';
 import Loading from './components/common/Loading';
-import ParticleBackground from './components/3d/ParticleBackground';
+import ParticleBackground from './components/3d/PracticalBackground';
 
 // Pages
 import Home from './pages/Home';

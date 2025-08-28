@@ -62,8 +62,7 @@
 }
 
 .btn-icon {
-  @apply p-3 rounded-full;
-  @apply flex items-center justify-center;
+  @apply p-3 rounded-full flex items-center justify-center;
   @apply transition-all duration-200 ease-out;
 }
 
@@ -74,8 +73,7 @@
 .btn-loading::after {
   content: '';
   @apply absolute inset-0 flex items-center justify-center;
-  @apply w-5 h-5 border-2 border-white/30 border-t-white;
-  @apply rounded-full animate-spin;
+  @apply w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin;
 }
 
 /* ===============================================
@@ -83,24 +81,16 @@
    =============================================== */
 
 .card {
-  @apply bg-white/10 backdrop-blur-md;
-  @apply border border-white/20;
-  @apply rounded-2xl shadow-xl;
+  @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl;
   @apply transition-all duration-300 ease-out;
 }
 
 .card-hover {
-  @apply hover:bg-white/15;
-  @apply hover:border-white/30;
-  @apply hover:shadow-2xl;
-  @apply hover:scale-105;
-  @apply cursor-pointer;
+  @apply hover:bg-white/15 hover:border-white/30 hover:shadow-2xl hover:scale-105 cursor-pointer;
 }
 
 .card-glass {
-  @apply bg-white/5 backdrop-blur-xl;
-  @apply border border-white/10;
-  @apply shadow-2xl;
+  @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
 }
 
 .card-solid {
@@ -108,8 +98,7 @@
 }
 
 .card-gradient {
-  @apply bg-gradient-to-br from-white/10 to-white/5;
-  @apply border-0 shadow-2xl;
+  @apply bg-gradient-to-br from-white/10 to-white/5 border-0 shadow-2xl;
 }
 
 .card-header {
@@ -121,9 +110,7 @@
 }
 
 .card-footer {
-  @apply p-6 border-t border-white/10;
-  @apply bg-white/5;
-  @apply rounded-b-2xl;
+  @apply p-6 border-t border-white/10 bg-white/5 rounded-b-2xl;
 }
 
 /* ===============================================
@@ -131,12 +118,10 @@
    =============================================== */
 
 .input-primary {
-  @apply w-full bg-white/10 backdrop-blur-md;
-  @apply border border-white/20 rounded-xl;
-  @apply px-4 py-3 text-white placeholder-gray-400;
+  @apply w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3;
+  @apply text-white placeholder-gray-400;
   @apply transition-all duration-300 ease-out;
-  @apply focus:outline-none focus:ring-4 focus:ring-emerald-500/30;
-  @apply focus:border-emerald-400 focus:bg-white/15;
+  @apply focus:outline-none focus:ring-4 focus:ring-emerald-500/30 focus:border-emerald-400 focus:bg-white/15;
 }
 
 .input-error {
@@ -160,8 +145,7 @@
 }
 
 .input-icon {
-  @apply absolute top-1/2 transform -translate-y-1/2;
-  @apply text-gray-400 pointer-events-none;
+  @apply absolute top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none;
 }
 
 .input-icon-left-pos {
@@ -185,256 +169,50 @@
 }
 
 /* ===============================================
-   MODAL COMPONENTS
+   TOOLTIP COMPONENTS
    =============================================== */
 
-.modal-overlay {
-  @apply fixed inset-0 bg-black/60 backdrop-blur-sm;
-  @apply flex items-center justify-center p-4;
-  @apply z-50;
+.tooltip {
+  @apply relative; /* remove 'group' */
 }
 
-.modal-container {
-  @apply bg-gray-900/95 backdrop-blur-xl;
-  @apply border border-white/20 rounded-2xl;
-  @apply shadow-2xl max-w-md w-full;
-  @apply transform transition-all duration-300 ease-out;
+.tooltip-content {
+  @apply absolute z-50 px-3 py-2 bg-gray-900 text-white text-sm border border-white/20 rounded-lg shadow-xl;
+  @apply opacity-0 invisible transform transition-all duration-200 pointer-events-none;
 }
 
-.modal-header {
-  @apply flex items-center justify-between;
-  @apply p-6 border-b border-white/10;
+/* Example: add 'group' in HTML like <div class="tooltip group"> */
+.tooltip:hover .tooltip-content {
+  @apply opacity-100 visible pointer-events-auto;
 }
 
-.modal-title {
-  @apply text-xl font-semibold text-white;
+/* Positions */
+.tooltip-top .tooltip-content {
+  @apply bottom-full left-1/2 transform -translate-x-1/2 mb-2 translate-y-2;
+}
+.tooltip:hover .tooltip-top .tooltip-content {
+  @apply translate-y-0;
 }
 
-.modal-close {
-  @apply text-gray-400 hover:text-white;
-  @apply transition-colors duration-200;
-  @apply p-2 rounded-full hover:bg-white/10;
+.tooltip-bottom .tooltip-content {
+  @apply top-full left-1/2 transform -translate-x-1/2 mt-2 -translate-y-2;
+}
+.tooltip:hover .tooltip-bottom .tooltip-content {
+  @apply translate-y-0;
 }
 
-.modal-body {
-  @apply p-6;
+.tooltip-left .tooltip-content {
+  @apply right-full top-1/2 transform -translate-y-1/2 mr-2 translate-x-2;
+}
+.tooltip:hover .tooltip-left .tooltip-content {
+  @apply translate-x-0;
 }
 
-.modal-footer {
-  @apply p-6 border-t border-white/10;
-  @apply flex items-center justify-end space-x-4;
+.tooltip-right .tooltip-content {
+  @apply left-full top-1/2 transform -translate-y-1/2 ml-2 -translate-x-2;
 }
-
-/* ===============================================
-   NAVIGATION COMPONENTS
-   =============================================== */
-
-.nav-link {
-  @apply text-gray-300 hover:text-white;
-  @apply font-medium transition-all duration-200;
-  @apply relative py-2 px-4 rounded-lg;
-  @apply hover:bg-white/10;
-}
-
-.nav-link-active {
-  @apply text-emerald-400;
-  @apply bg-emerald-500/20;
-}
-
-.nav-link::after {
-  content: '';
-  @apply absolute bottom-0 left-1/2 transform -translate-x-1/2;
-  @apply w-0 h-0.5 bg-emerald-400;
-  @apply transition-all duration-300;
-}
-
-.nav-link:hover::after,
-.nav-link-active::after {
-  @apply w-full;
-}
-
-/* ===============================================
-   BADGE COMPONENTS
-   =============================================== */
-
-.badge {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full;
-  @apply text-xs font-medium;
-}
-
-.badge-primary {
-  @apply bg-emerald-500/20 text-emerald-400;
-  @apply border border-emerald-500/30;
-}
-
-.badge-secondary {
-  @apply bg-gray-500/20 text-gray-400;
-  @apply border border-gray-500/30;
-}
-
-.badge-success {
-  @apply bg-green-500/20 text-green-400;
-  @apply border border-green-500/30;
-}
-
-.badge-warning {
-  @apply bg-yellow-500/20 text-yellow-400;
-  @apply border border-yellow-500/30;
-}
-
-.badge-danger {
-  @apply bg-red-500/20 text-red-400;
-  @apply border border-red-500/30;
-}
-
-.badge-info {
-  @apply bg-blue-500/20 text-blue-400;
-  @apply border border-blue-500/30;
-}
-
-/* ===============================================
-   ALERT COMPONENTS
-   =============================================== */
-
-.alert {
-  @apply p-4 rounded-xl border-l-4;
-  @apply flex items-start space-x-3;
-}
-
-.alert-success {
-  @apply bg-green-500/10 border-green-500;
-  @apply text-green-400;
-}
-
-.alert-warning {
-  @apply bg-yellow-500/10 border-yellow-500;
-  @apply text-yellow-400;
-}
-
-.alert-error {
-  @apply bg-red-500/10 border-red-500;
-  @apply text-red-400;
-}
-
-.alert-info {
-  @apply bg-blue-500/10 border-blue-500;
-  @apply text-blue-400;
-}
-
-.alert-icon {
-  @apply w-5 h-5 flex-shrink-0 mt-0.5;
-}
-
-.alert-content {
-  @apply flex-1;
-}
-
-.alert-title {
-  @apply font-medium mb-1;
-}
-
-.alert-message {
-  @apply text-sm opacity-90;
-}
-
-/* ===============================================
-   LOADING COMPONENTS
-   =============================================== */
-
-.spinner {
-  @apply w-8 h-8 border-4 border-white/20;
-  @apply border-t-white rounded-full;
-  @apply animate-spin;
-}
-
-.spinner-sm {
-  @apply w-4 h-4 border-2;
-}
-
-.spinner-lg {
-  @apply w-12 h-12 border-4;
-}
-
-.skeleton {
-  @apply bg-gray-700/50 animate-pulse rounded;
-}
-
-.skeleton-text {
-  @apply h-4 bg-gray-700/50 rounded animate-pulse;
-}
-
-.skeleton-avatar {
-  @apply w-10 h-10 bg-gray-700/50 rounded-full animate-pulse;
-}
-
-.loading-dot:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.loading-dot:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.loading-dot:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-/* ===============================================
-   DROPDOWN COMPONENTS
-   =============================================== */
-
-.dropdown {
-  @apply relative inline-block;
-}
-
-.dropdown-menu {
-  @apply absolute top-full left-0 mt-2;
-  @apply bg-gray-800/95 backdrop-blur-xl;
-  @apply border border-white/20 rounded-xl;
-  @apply shadow-2xl min-w-48 z-50;
-  @apply opacity-0 invisible;
-  @apply transform scale-95 transition-all duration-200;
-}
-
-.dropdown-menu.open {
-  @apply opacity-100 visible scale-100;
-}
-
-.dropdown-item {
-  @apply block w-full text-left px-4 py-3;
-  @apply text-gray-300 hover:text-white;
-  @apply hover:bg-white/10;
-  @apply transition-colors duration-200;
-  @apply first:rounded-t-xl last:rounded-b-xl;
-}
-
-.dropdown-divider {
-  @apply h-px bg-white/10 my-2;
-}
-
-/* ===============================================
-   TAB COMPONENTS
-   =============================================== */
-
-.tab-list {
-  @apply flex border-b border-white/10;
-  @apply bg-white/5 rounded-t-xl p-1;
-}
-
-.tab-button {
-  @apply flex-1 py-3 px-4 text-center;
-  @apply text-gray-400 hover:text-white;
-  @apply font-medium transition-all duration-200;
-  @apply rounded-lg;
-}
-
-.tab-button.active {
-  @apply text-white bg-white/10;
-  @apply shadow-lg;
-}
-
-.tab-panel {
-  @apply p-6;
+.tooltip:hover .tooltip-right .tooltip-content {
+  @apply translate-x-0;
 }
 
 /* ===============================================
@@ -442,382 +220,36 @@
    =============================================== */
 
 .progress-bar {
-  @apply w-full bg-gray-700 rounded-full h-2;
-  @apply overflow-hidden;
+  @apply w-full bg-gray-700 rounded-full h-2 overflow-hidden;
 }
 
 .progress-fill {
-  @apply h-full bg-gradient-to-r from-emerald-500 to-emerald-600;
-  @apply transition-all duration-500 ease-out;
-  @apply relative;
+  @apply h-full bg-gradient-to-r from-emerald-500 to-emerald-600 relative transition-all duration-500 ease-out;
 }
 
 .progress-fill::after {
   content: '';
-  @apply absolute inset-0;
-  @apply bg-gradient-to-r from-transparent via-white/20 to-transparent;
-  @apply animate-shimmer;
-}
-
-.progress-circle {
-  @apply relative w-16 h-16;
-}
-
-.progress-circle svg {
-  @apply transform -rotate-90;
-}
-
-.progress-circle-bg {
-  @apply stroke-gray-700 fill-none;
-}
-
-.progress-circle-fill {
-  @apply stroke-emerald-500 fill-none;
-  @apply transition-all duration-500 ease-out;
-  stroke-linecap: round;
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer;
 }
 
 /* ===============================================
-   TOOLTIP COMPONENTS
+   LOADING DOTS
    =============================================== */
 
-.tooltip {
-  @apply relative group;
-}
-
-.tooltip-content {
-  @apply absolute z-50 px-3 py-2;
-  @apply bg-gray-900 text-white text-sm;
-  @apply border border-white/20 rounded-lg;
-  @apply shadow-xl;
-  @apply opacity-0 invisible;
-  @apply transform transition-all duration-200;
-  @apply pointer-events-none;
-}
-
-.tooltip:hover .tooltip-content {
-  @apply opacity-100 visible;
-  @apply pointer-events-auto;
-}
-
-.tooltip-top .tooltip-content {
-  @apply bottom-full left-1/2 transform -translate-x-1/2 mb-2;
-  @apply translate-y-2;
-}
-
-.tooltip:hover .tooltip-top .tooltip-content {
-  @apply translate-y-0;
-}
-
-.tooltip-bottom .tooltip-content {
-  @apply top-full left-1/2 transform -translate-x-1/2 mt-2;
-  @apply -translate-y-2;
-}
-
-.tooltip:hover .tooltip-bottom .tooltip-content {
-  @apply translate-y-0;
-}
-
-.tooltip-left .tooltip-content {
-  @apply right-full top-1/2 transform -translate-y-1/2 mr-2;
-  @apply translate-x-2;
-}
-
-.tooltip:hover .tooltip-left .tooltip-content {
-  @apply translate-x-0;
-}
-
-.tooltip-right .tooltip-content {
-  @apply left-full top-1/2 transform -translate-y-1/2 ml-2;
-  @apply -translate-x-2;
-}
-
-.tooltip:hover .tooltip-right .tooltip-content {
-  @apply translate-x-0;
-}
-
-/* ===============================================
-   PAGINATION COMPONENTS
-   =============================================== */
-
-.pagination {
-  @apply flex items-center space-x-2;
-}
-
-.pagination-item {
-  @apply w-10 h-10 flex items-center justify-center;
-  @apply text-gray-300 hover:text-white;
-  @apply border border-white/20 hover:border-emerald-400;
-  @apply rounded-lg transition-all duration-200;
-  @apply hover:bg-white/10;
-}
-
-.pagination-item.active {
-  @apply text-white bg-emerald-500;
-  @apply border-emerald-500;
-}
-
-.pagination-item.disabled {
-  @apply text-gray-600 cursor-not-allowed;
-  @apply hover:text-gray-600 hover:border-white/20;
-  @apply hover:bg-transparent;
-}
-
-/* ===============================================
-   BREADCRUMB COMPONENTS
-   =============================================== */
-
-.breadcrumb {
-  @apply flex items-center space-x-2;
-  @apply text-sm text-gray-400;
-}
-
-.breadcrumb-item {
-  @apply flex items-center space-x-2;
-}
-
-.breadcrumb-link {
-  @apply hover:text-white transition-colors duration-200;
-}
-
-.breadcrumb-separator {
-  @apply text-gray-600;
-}
-
-/* ===============================================
-   ACCORDION COMPONENTS
-   =============================================== */
-
-.accordion-item {
-  @apply border-b border-white/10 last:border-b-0;
-}
-
-.accordion-header {
-  @apply w-full flex items-center justify-between;
-  @apply py-4 px-6 text-left;
-  @apply text-white hover:bg-white/5;
-  @apply transition-all duration-200;
-}
-
-.accordion-content {
-  @apply overflow-hidden transition-all duration-300 ease-out;
-  @apply max-h-0;
-}
-
-.accordion-content.open {
-  @apply max-h-96;
-}
-
-.accordion-body {
-  @apply px-6 pb-4 text-gray-300;
-}
-
-/* ===============================================
-   SLIDER COMPONENTS
-   =============================================== */
-
-.slider {
-  @apply relative w-full h-2 bg-gray-700 rounded-full;
-  @apply appearance-none cursor-pointer;
-}
-
-.slider::-webkit-slider-thumb {
-  @apply appearance-none w-5 h-5;
-  @apply bg-emerald-500 rounded-full;
-  @apply shadow-lg cursor-pointer;
-  @apply transition-all duration-200;
-}
-
-.slider::-webkit-slider-thumb:hover {
-  @apply bg-emerald-400 scale-110;
-}
-
-.slider::-moz-range-thumb {
-  @apply w-5 h-5 bg-emerald-500 rounded-full;
-  @apply border-0 cursor-pointer;
-  @apply transition-all duration-200;
-}
-
-/* ===============================================
-   SWITCH COMPONENTS
-   =============================================== */
-
-.switch {
-  @apply relative inline-flex items-center;
-  @apply w-12 h-6 bg-gray-600 rounded-full;
-  @apply transition-colors duration-200;
-  @apply cursor-pointer;
-}
-
-.switch.checked {
-  @apply bg-emerald-500;
-}
-
-.switch-thumb {
-  @apply absolute left-1 w-4 h-4;
-  @apply bg-white rounded-full;
-  @apply transform transition-transform duration-200;
-  @apply shadow-md;
-}
-
-.switch.checked .switch-thumb {
-  @apply translate-x-6;
-}
-
-/* ===============================================
-   RATING COMPONENTS
-   =============================================== */
-
-.rating {
-  @apply flex items-center space-x-1;
-}
-
-.rating-star {
-  @apply w-5 h-5 text-gray-400;
-  @apply cursor-pointer transition-colors duration-200;
-}
-
-.rating-star.filled {
-  @apply text-yellow-400;
-}
-
-.rating-star:hover {
-  @apply text-yellow-300;
-}
-
-/* ===============================================
-   AVATAR COMPONENTS
-   =============================================== */
-
-.avatar {
-  @apply relative inline-flex items-center justify-center;
-  @apply bg-gray-600 rounded-full;
-  @apply font-medium text-white;
-  @apply overflow-hidden;
-}
-
-.avatar-sm {
-  @apply w-8 h-8 text-sm;
-}
-
-.avatar-md {
-  @apply w-10 h-10 text-base;
-}
-
-.avatar-lg {
-  @apply w-16 h-16 text-xl;
-}
-
-.avatar-xl {
-  @apply w-24 h-24 text-3xl;
-}
-
-.avatar-status {
-  @apply absolute bottom-0 right-0;
-  @apply w-3 h-3 border-2 border-gray-900 rounded-full;
-}
-
-.avatar-status.online {
-  @apply bg-green-400;
-}
-
-.avatar-status.offline {
-  @apply bg-gray-400;
-}
-
-.avatar-status.busy {
-  @apply bg-red-400;
-}
-
-/* ===============================================
-   SEARCH COMPONENTS
-   =============================================== */
-
-.search-container {
-  @apply relative max-w-md;
-}
-
-.search-input {
-  @apply w-full bg-white/10 backdrop-blur-md;
-  @apply border border-white/20 rounded-xl;
-  @apply pl-12 pr-4 py-3;
-  @apply text-white placeholder-gray-400;
-  @apply transition-all duration-300 ease-out;
-  @apply focus:outline-none focus:ring-4 focus:ring-emerald-500/30;
-  @apply focus:border-emerald-400 focus:bg-white/15;
-}
-
-.search-icon {
-  @apply absolute left-4 top-1/2 transform -translate-y-1/2;
-  @apply text-gray-400 w-5 h-5;
-}
-
-.search-results {
-  @apply absolute top-full left-0 right-0 mt-2;
-  @apply bg-gray-800/95 backdrop-blur-xl;
-  @apply border border-white/20 rounded-xl;
-  @apply shadow-2xl max-h-64 overflow-y-auto;
-  @apply z-50;
-}
-
-.search-result-item {
-  @apply px-4 py-3 hover:bg-white/10;
-  @apply cursor-pointer transition-colors duration-200;
-  @apply border-b border-white/10 last:border-b-0;
-}
-
-/* ===============================================
-   RESPONSIVE UTILITIES
-   =============================================== */
-
-@media (max-width: 640px) {
-  .card {
-    @apply rounded-lg;
-  }
-  
-  .modal-container {
-    @apply rounded-lg;
-  }
-  
-  .btn-primary,
-  .btn-secondary,
-  .btn-outline {
-    @apply py-2 px-4 text-sm;
-  }
-  
-  .hover-lift:hover,
-  .card-hover:hover {
-    @apply transform-none scale-100;
-  }
-}
-
-/* ===============================================
-   DARK MODE ADJUSTMENTS
-   =============================================== */
-
-@media (prefers-color-scheme: light) {
-  /* Light mode overrides can be added here if needed */
-}
-
-/* ===============================================
-   PRINT STYLES
-   =============================================== */
-
-@media print {
-  .card {
-    @apply bg-white text-black border-gray-300;
-  }
-  
-  .btn-primary,
-  .btn-secondary {
-    @apply bg-gray-200 text-black border border-gray-300;
-  }
-}-dots {
+.loading-dots {
   @apply flex space-x-2;
 }
 
 .loading-dot {
-  @apply w-2 h-2 bg-emerald-400 rounded-full;
-  @apply animate-bounce;
+  @apply w-2 h-2 bg-emerald-400 rounded-full animate-bounce;
 }
 
+.loading-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.loading-dot:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.loading-dot:nth-child(3) {
+  animation-delay: 0.2s;
+}

@@ -40,7 +40,6 @@ exports.addToCart = async (req, res) => {
   }
 };
 
-// Get all items in a cart
 exports.getCart = async (req, res) => {
   try {
     const { cartId } = req.query;
@@ -51,9 +50,12 @@ exports.getCart = async (req, res) => {
 
     res.json(cart.items.map((item) => ({
       id: item._id,
+      productId: item.product._id, // ✅ Add this field
       name: item.product.name,
       price: item.product.price,
       quantity: item.quantity,
+      image: item.product.image || "", // ✅ Add image
+      stock: item.product.stock // ✅ Add stock info
     })));
   } catch (err) {
     res.status(500).json({ error: err.message });
